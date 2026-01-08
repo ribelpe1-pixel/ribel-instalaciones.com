@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Proyectos - Ribel Instalaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-height: 60px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #66b3ff;
+        }
+        
+        /* Menú desplegable de productos */
+        .nav-links li {
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #001f3f;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #003d7a;
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.8em;
+        }
+
+        .hero-detail {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 120px 2rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero-detail h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .proyectos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,31,63,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,31,63,0.2);
+        }
+
+        .card-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            height: 400px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.3s ease, filter 0.3s ease;
+        }
+        
+        /* Ajustes específicos para imágenes de comunidad de riego */
+        .card:first-of-type .card-images img:nth-child(2),
+        .card:first-of-type .card-images img:nth-child(3) {
+            object-fit: contain;
+            object-position: center;
+            background-color: #f5f5f5;
+        }
+        
+        .card:hover .card-image {
+            transform: scale(1.05);
+            opacity: 0.95;
+            filter: brightness(1.05);
+        }
+
+        .card-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #001f3f;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .card p {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-detail h1 {
+                font-size: 2rem;
+            }
+            
+            .card-images {
+                height: 250px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="imagenes/Logo.png" alt="Logo Ribel">
+                    RIBEL
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="productos-toggle">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="instalaciones-electricas.html">⚡ Instalaciones Eléctricas</a>
+                        <a href="energia-fotovoltaica.html">☀️ Energía Fotovoltaica</a>
+                        <a href="domotica.html">💡 Domótica</a>
+                        <a href="climatizacion.html">❄️ Climatización</a>
+                        <a href="puertas-automatizadas.html">🚪 Puertas Automatizadas</a>
+                        <a href="fontaneria.html">🚰 Fontanería</a>
+                    </div>
+                </li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-detail">
+        <h1>Nuestros Proyectos</h1>
+        <p>Conoce algunos de los proyectos más destacados que hemos realizado</p>
+    </section>
+
+    <div class="content-section">
+        <div class="proyectos-grid">
+            <!-- Proyecto 1: Paneles Solares en Comunidad de Riego -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>☀️ Paneles Solares en Comunidad de Riego</h3>
+                    <p>Instalación de sistema fotovoltaico de autoconsumo para comunidad de riego agrícola, con una potencia instalada de 25kW que permite el funcionamiento óptimo de las bombas de agua durante las horas de mayor radiación solar. El sistema incluye inversores de última generación, estructura de montaje reforzada y sistema de monitorización remota que permite supervisar la producción en tiempo real. Esta instalación ha conseguido reducir los costes energéticos de la comunidad en un 70%, amortizándose la inversión en menos de 5 años. Además, se ha instalado un sistema de baterías para acumulación de energía que garantiza el suministro incluso en días nublados, proporcionando autonomía energética y contribuyendo significativamente a la sostenibilidad del sector agrícola.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/counidad 1.jpeg" alt="Paneles Solares 1" class="card-image">
+                    <img src="imagenes/comunidad foto 2.jpeg" alt="Paneles Solares 2" class="card-image">
+                    <img src="imagenes/comunidad 3.jpeg" alt="Paneles Solares 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 2: Sistema Fotovoltaico Vivienda -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>☀️ Sistema Fotovoltaico en Vivienda</h3>
+                    <p>Montaje e instalación de sistema solar fotovoltaico de 6kW de potencia para vivienda unifamiliar, compuesto por 15 paneles de alta eficiencia de 400W cada uno, inversor híbrido y sistema de almacenamiento con baterías de litio de 10kWh. El sistema está diseñado para maximizar el autoconsumo, alcanzando un 80% de independencia energética durante todo el año. Incluye optimizadores de potencia en cada panel para obtener el máximo rendimiento incluso en condiciones de sombreado parcial, sistema de monitorización en tiempo real mediante aplicación móvil, y protecciones contra sobretensiones. La instalación se completó en tan solo 3 días y ha logrado reducir la factura eléctrica mensual del hogar en más de 150€, con un periodo de amortización estimado de 6-7 años. Además, el sistema cuenta con todas las certificaciones necesarias y garantías del fabricante de 25 años en paneles y 10 años en inversores.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/resicencial1.jpeg" alt="Sistema Fotovoltaico 1" class="card-image">
+                    <img src="imagenes/residencial foto 2.jpeg" alt="Sistema Fotovoltaico 2" class="card-image">
+                    <img src="imagenes/residencia33.jpeg" alt="Sistema Fotovoltaico 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 3: Vivienda Plurifamiliar -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🏘️ Instalación Integral Vivienda Plurifamiliar</h3>
+                    <p>Proyecto completo de instalaciones para edificio residencial de 4 viviendas, abarcando fontanería, electricidad y energía fotovoltaica con sistema de autoconsumo compartido. La instalación eléctrica incluye cuadros individuales para cada vivienda con protecciones magnetotérmicas y diferenciales, cableado de cobre de alta calidad, tomas de corriente y puntos de luz según normativa vigente, e instalación de videoporteros digitales. En fontanería se ha realizado la red completa de agua fría y caliente con tubería multicapa, instalación de sanitarios de bajo consumo, sistema de aerotermia para agua caliente sanitaria y calefacción, y red de saneamiento con arquetas de inspección. El sistema fotovoltaico compartido de 12kW en cubierta permite a los residentes beneficiarse del autoconsumo colectivo, reduciendo hasta un 60% el consumo de la red eléctrica. Todos los trabajos se han ejecutado cumpliendo estrictamente el Código Técnico de Edificación y cuentan con las certificaciones y boletines correspondientes emitidos por técnicos competentes.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/vivienda 1.jpg" alt="Vivienda Plurifamiliar 1" class="card-image">
+                    <img src="imagenes/vivienda 2.jpg" alt="Vivienda Plurifamiliar 2" class="card-image">
+                    <img src="imagenes/vivienda 3.jpg" alt="Vivienda Plurifamiliar 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 4: Pérgola y Persiana Automatizada -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🏠 Pérgola y Persiana Automatizada</h3>
+                    <p>Instalación de pérgola bioclimática de aluminio de alta resistencia con sistema de lamas orientables motorizadas que permite regular la entrada de luz y ventilación de forma automática o manual. El sistema está equipado con sensores inteligentes de viento, lluvia y sol que ajustan automáticamente la posición de las lamas para proteger el espacio y optimizar el confort térmico. Además, se ha instalado una persiana motorizada enrollable de última generación con tejido screen de alta calidad que proporciona protección solar, privacidad y aislamiento térmico. Todo el sistema se controla mediante mando a distancia, pulsadores de pared y aplicación móvil, permitiendo también la programación horaria para abrir y cerrar automáticamente según las necesidades del usuario. La instalación incluye iluminación LED integrada en la estructura de la pérgola con regulación de intensidad, y motores silenciosos de bajo consumo con sistema de detección de obstáculos para máxima seguridad. El conjunto proporciona un espacio exterior confortable durante todo el año, aumentando significativamente la habitabilidad y el valor de la propiedad.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/Pergola 1.jpeg" alt="Pérgola Automatizada 1" class="card-image">
+                    <img src="imagenes/Pergola 2.jpeg" alt="Pérgola Automatizada 2" class="card-image">
+                    <img src="imagenes/Pergola 3.jpeg" alt="Pérgola Automatizada 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 5: Nuevo Punto de Suministro -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>⚡ Nuevo Punto de Suministro Eléctrico</h3>
+                    <p>Proyecto completo de instalación de nuevo punto de suministro eléctrico desde cero, incluyendo la gestión y tramitación con la compañía distribuidora. Los trabajos realizados comprenden la instalación de acometida subterránea desde la red de distribución hasta la propiedad, montaje de caja general de protección (CGP) homologada con bases portafusibles y protecciones según normativa, instalación de módulo de contador con sistemas de medida y telegestión, línea general de alimentación con cable de cobre de sección adecuada, y cuadro de distribución principal con protecciones magnetotérmicas, diferenciales y dispositivos de protección contra sobretensiones. El proyecto incluye la redacción de memoria técnica, esquemas eléctricos, cálculos justificativos de las secciones de conductores y protecciones, y emisión del boletín eléctrico certificado por instalador autorizado. Se han realizado todas las pruebas y verificaciones reglamentarias, incluyendo medición de resistencia de puesta a tierra, aislamiento de la instalación y correcto funcionamiento de los dispositivos de protección. El proyecto ha sido legalizado ante el organismo competente de la comunidad autónoma, obteniendo el certificado de instalación eléctrica necesario para el alta del suministro.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/Imagen acometida 1.jpeg" alt="Punto Suministro 1" class="card-image">
+                    <img src="imagenes/acometida 2.jpeg" alt="Punto Suministro 2" class="card-image">
+                    <img src="imagenes/imagen acometida 3.jpeg" alt="Punto Suministro 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 6: Cámaras de Vigilancia -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>📹 Sistema de Cámaras de Vigilancia</h3>
+                    <p>Instalación completa de sistema de videovigilancia profesional compuesto por 8 cámaras IP de alta definición (4MP) con visión nocturna infrarroja de hasta 30 metros, distribuidas estratégicamente para cubrir todos los accesos y zonas críticas de la propiedad. El sistema incluye grabador de vídeo en red (NVR) de 8 canales con disco duro de 2TB para almacenamiento de grabaciones durante más de 30 días, switch PoE (Power over Ethernet) que permite alimentar las cámaras a través del mismo cable de red simplificando la instalación, y router con acceso seguro desde cualquier dispositivo mediante aplicación móvil y navegador web. Las cámaras cuentan con detección inteligente de movimiento con zona de detección configurable, notificaciones push al smartphone cuando se detecta actividad, y audio bidireccional en cámaras seleccionadas. El cableado se ha realizado con cable de red Cat6 para garantizar máxima calidad de imagen, instalado en canalización protegida y discretamente integrado en la estructura del edificio. El sistema proporciona seguridad 24/7 con visualización en tiempo real y reproducción de grabaciones, mejorando significativamente la protección de la vivienda o negocio.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/Vigilancia 1.jpeg" alt="Cámaras Vigilancia 1" class="card-image">
+                    <img src="imagenes/Vigilancia 2.jpeg" alt="Cámaras Vigilancia 2" class="card-image">
+                    <img src="imagenes/Vigilancia 3.jpeg" alt="Cámaras Vigilancia 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 7: Puerta Seccional -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🚪 Puerta Seccional en Vivienda</h3>
+                    <p>Montaje e instalación profesional de puerta seccional motorizada para garaje, fabricada en paneles de acero galvanizado de 40mm de espesor con aislamiento interior de poliuretano inyectado que proporciona excelente aislamiento térmico y acústico. La puerta incluye motor con encoder de última generación que garantiza un funcionamiento suave y silencioso, sistema de apertura por radiofrecuencia con dos mandos a distancia programables y teclado numérico de acceso exterior con código personalizable. El sistema de seguridad incorpora fotocélulas de detección de obstáculos en el cierre, sistema antiaplastamiento que detiene y invierte el movimiento si detecta resistencia, y desbloqueo manual de emergencia para apertura en caso de corte eléctrico. Los paneles están disponibles en múltiples acabados que se adaptan a la estética de la vivienda, y las ventanas de policarbonato integradas permiten la entrada de luz natural al garaje. La instalación incluye guías laterales reforzadas de aluminio, muelles de torsión de alta resistencia calculados según el peso de la puerta, y todos los elementos de fijación necesarios. El conjunto proporciona seguridad, comodidad y eficiencia energética, con garantía del fabricante de 5 años en motor y 10 años en estructura.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/Imagen puerta1.jpeg" alt="Puerta Seccional 1" class="card-image">
+                    <img src="imagenes/Imagen puerta 2.jpeg" alt="Puerta Seccional 2" class="card-image">
+                    <img src="imagenes/Imagen puerta 3.jpeg" alt="Puerta Seccional 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 8: Sistema Depuración Piscina -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🏊 Sistema de Depuración para Piscina</h3>
+                    <p>Instalación completa de sistema de depuración y tratamiento de agua para piscina de 50m³, diseñado para mantener el agua en perfectas condiciones de higiene y transparencia con el mínimo mantenimiento. El sistema incluye bomba de filtración de 1,5 CV con prefiltro incorporado dimensionada según el volumen de la piscina para realizar el recambio completo del agua cada 4 horas, filtro de arena de gran capacidad con válvula multivía de 6 posiciones que permite filtrado, lavado, enjuague, recirculación, cerrado y vaciado, sistema de cloración salina que genera cloro de forma automática y natural mediante electrólisis de sal evitando el almacenamiento de productos químicos peligrosos, y sistema de control automático con temporizador programable que gestiona los ciclos de filtración. La instalación incluye skimmers de superficie para la recogida de suciedad, boquillas de impulsión para la correcta circulación del agua, toma de fondo para limpiafondos y vaciado, y cuadro de maniobra con protecciones eléctricas y programador horario digital. El sistema cuenta con manómetro para control de presión del filtro, y todos los elementos hidráulicos están conectados mediante tubería de PVC sanitario enterrada con las pendientes adecuadas. Proporciona un agua cristalina y saludable durante toda la temporada de baño con consumo energético optimizado.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/depuradora1.jpeg" alt="Depuración Piscina 1" class="card-image">
+                    <img src="imagenes/depuradora2.jpeg" alt="Depuración Piscina 2" class="card-image">
+                    <img src="imagenes/depuradora 3.jpeg" alt="Depuración Piscina 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 9: Canalización Aguas Pluviales -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🌧️ Canalización de Aguas Pluviales</h3>
+                    <p>Sistema completo de recogida, canalización y evacuación de aguas pluviales para edificio residencial de dos plantas, diseñado según la normativa del Código Técnico de Edificación para proteger la estructura del inmueble de filtraciones y humedades. La instalación incluye canalones de PVC de alta resistencia instalados en todo el perímetro de la cubierta con la pendiente adecuada (mínimo 0,5%) hacia los puntos de bajada, bajantes de 90mm de diámetro dimensionadas según superficie de recogida y pluviometría de la zona, arquetas sifónicas en la base de cada bajante que evitan la entrada de malos olores y facilitan el mantenimiento, y red de tuberías de saneamiento enterradas con pendiente del 2% que conducen el agua hasta el punto de vertido o sistema de drenaje. Se han instalado elementos de fijación reforzados para soportar el peso del agua y las dilataciones térmicas, rejillas de protección en la entrada de los canalones para evitar la obstrucción por hojas y suciedad, y codos y derivaciones con el radio adecuado para evitar turbulencias y atascos. El sistema incluye también la impermeabilización de juntas y puntos críticos, y arquetas de registro estratégicamente ubicadas que permiten la limpieza y el mantenimiento periódico de toda la red. Esta instalación garantiza la correcta evacuación del agua de lluvia protegiendo los cimientos, muros y estructura del edificio de posibles daños por humedad.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/canali 1.jpeg" alt="Aguas Pluviales 1" class="card-image">
+                    <img src="imagenes/canali 2.jpeg" alt="Aguas Pluviales 2" class="card-image">
+                    <img src="imagenes/canali 3.jpeg" alt="Aguas Pluviales 3" class="card-image">
+                </div>
+            </div>
+            
+            <!-- Proyecto 10: Fosa Séptica -->
+            <div class="card">
+                <div class="card-content">
+                    <h3>🚰 Instalación de Fosa Séptica</h3>
+                    <p>Instalación completa de sistema de tratamiento de aguas residuales mediante fosa séptica homologada de 3000 litros para vivienda unifamiliar sin conexión a red de saneamiento público. El sistema incluye fosa séptica de tres cámaras fabricada en polietileno de alta densidad resistente a la corrosión y con tratamiento UV, que realiza la separación de sólidos, digestión anaerobia de materia orgánica y decantación de lodos. La instalación comprende excavación y acondicionamiento del terreno con lecho de arena compactada, colocación de la fosa con las pendientes adecuadas, conexión de tuberías de entrada y salida con diámetro mínimo de 110mm, arquetas de registro antes y después de la fosa para inspección y mantenimiento, y sistema de ventilación mediante tubo que evacúa gases a una altura segura. Se ha instalado también un pozo filtrante o sistema de drenaje para la dispersión del agua tratada en el terreno según las características del suelo, cumpliendo con los requisitos sanitarios y medioambientales. El sistema incluye filtro biológico aerobio que mejora la calidad del efluente antes del vertido, y tapa de inspección de fácil acceso para las labores periódicas de vaciado de lodos. La instalación está dimensionada para el número de usuarios de la vivienda y cuenta con todas las autorizaciones sanitarias y medioambientales necesarias, garantizando un tratamiento eficaz de las aguas residuales que protege el medio ambiente y la salud pública.</p>
+                </div>
+                <div class="card-images">
+                    <img src="imagenes/fosa 1.jpeg" alt="Fosa Séptica 1" class="card-image">
+                    <img src="imagenes/fosa 2.jpeg" alt="Fosa Séptica 2" class="card-image">
+                    <img src="imagenes/fosa 3.jpeg" alt="Fosa Séptica 3" class="card-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Ribel Instalaciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Control del menú desplegable de productos
+        const productosToggle = document.getElementById('productos-toggle');
+        const dropdown = document.querySelector('.dropdown');
+        
+        if (productosToggle && dropdown) {
+            // Toggle del menú al hacer clic en "Productos"
+            productosToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Cerrar el menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Cerrar el menú al hacer clic en un enlace del dropdown
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

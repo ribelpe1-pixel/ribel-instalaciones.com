@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalaciones Eléctricas - Ribel Instalaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-height: 60px;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #66b3ff;
+        }
+        
+        /* Menú desplegable de productos */
+        .nav-links li {
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #001f3f;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #003d7a;
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.8em;
+        }
+
+        .hero-detail {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 120px 2rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero-detail h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .detail-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,31,63,0.2);
+        }
+
+        .detail-text h2 {
+            color: #001f3f;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .services-list {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .services-list h2 {
+            color: #001f3f;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,31,63,0.1);
+            text-align: center;
+        }
+
+        .service-item h3 {
+            color: #001f3f;
+            margin-bottom: 1rem;
+        }
+
+        .service-item p {
+            text-align: center;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #001f3f;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-detail h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="imagenes/Logo.png" alt="Logo Ribel">
+                    RIBEL
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="productos-toggle">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="instalaciones-electricas.html">⚡ Instalaciones Eléctricas</a>
+                        <a href="energia-fotovoltaica.html">☀️ Energía Fotovoltaica</a>
+                        <a href="domotica.html">💡 Domótica</a>
+                        <a href="climatizacion.html">❄️ Climatización</a>
+                        <a href="puertas-automatizadas.html">🚪 Puertas Automatizadas</a>
+                        <a href="fontaneria.html">🚰 Fontanería</a>
+                    </div>
+                </li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-detail">
+        <h1>⚡ Instalaciones Eléctricas</h1>
+        <p>Soluciones eléctricas profesionales</p>
+    </section>
+
+    <div class="content-section">
+        <div class="detail-grid">
+            <div>
+                <img src="imagenes/Electricidad.webp" alt="Instalaciones Eléctricas" class="detail-image">
+            </div>
+            <div class="detail-text">
+                <h2>Instalaciones Eléctricas Profesionales</h2>
+                <p>En Ribel Instalaciones realizamos instalaciones eléctricas completas tanto en viviendas como en industrias, garantizando la máxima seguridad, eficiencia energética y cumplimiento de toda la normativa vigente.</p>
+                <p>Contamos con un equipo de electricistas certificados, capacitados para llevar a cabo proyectos de cualquier envergadura, desde pequeñas reformas hasta grandes instalaciones industriales.</p>
+                <p>Todos nuestros trabajos cumplen con el Reglamento Electrotécnico de Baja Tensión (REBT) y están certificados por organismos oficiales.</p>
+            </div>
+        </div>
+
+        <div class="services-list">
+            <h2>Nuestros Servicios de Instalaciónes Eléctricas</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>🏠 Instalaciones Residenciales</h3>
+                    <p>Instalaciones eléctricas completas para viviendas, pisos, chalets y comunidades de vecinos.</p>
+                </div>
+                <div class="service-item">
+                    <h3>🏭 Instalaciones Industriales</h3>
+                    <p>Proyectos eléctricos para naves industriales, fábricas y polígonos.</p>
+                </div>
+                <div class="service-item">
+                    <h3>🔧 Reformas Eléctricas</h3>
+                    <p>Actualización y modernización de instalaciones eléctricas antiguas adaptándolas a la normativa actual.</p>
+                </div>
+                <div class="service-item">
+                    <h3>⚡ Cuadros Eléctricos</h3>
+                    <p>Montaje e instalación de cuadros eléctricos industriales seguros y eficientes.</p>
+                </div>
+                <div class="service-item">
+                    <h3>🔌 Cargadores eléctricos</h3>
+                    <p>Instalación de cargadores para vehículos eléctricos, adaptadas a cada necesidad.</p>
+                </div>
+                <div class="service-item">
+                    <h3>📋 Boletines Eléctricos</h3>
+                    <p>Emisión de certificados y boletines eléctricos oficiales para legalizar tu instalación.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>¿Necesitas una instalación eléctrica?</h2>
+            <p>Solicita un presupuesto sin compromiso y te asesoraremos sobre la mejor solución para tu proyecto</p>
+            <a href="index.html#contacto" class="btn">Solicitar Presupuesto</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Ribel Instalaciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Control del menú desplegable de productos
+        const productosToggle = document.getElementById('productos-toggle');
+        const dropdown = document.querySelector('.dropdown');
+        
+        if (productosToggle && dropdown) {
+            // Toggle del menú al hacer clic en "Productos"
+            productosToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Cerrar el menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Cerrar el menú al hacer clic en un enlace del dropdown
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ribel Instalaciones - Expertos en Instalaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-height: 60px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #66b3ff;
+        }
+        
+        /* Menú desplegable de productos */
+        .nav-links li {
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #001f3f;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #003d7a;
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.8em;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: #0061fc;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 8s ease;
+        }
+        
+        .hero:hover .hero-image {
+            transform: scale(1.1);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.75) 0%, rgba(0, 61, 122, 0.75) 100%);
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #001f3f;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        h2 {
+            color: #001f3f;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .productos-grid, .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,31,63,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,31,63,0.2);
+        }
+        
+        .card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        /* Estilos específicos para proyectos sin enlace */
+        #proyectos .card {
+            cursor: default;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.3s ease, filter 0.3s ease;
+        }
+        
+        .card:hover .card-image {
+            transform: scale(1.08);
+            opacity: 0.95;
+            filter: brightness(1.05);
+        }
+        
+        /* Ajustes específicos para cada imagen */
+        .card:nth-child(1) .card-image {
+            object-position: center 70%;
+        }
+        
+        .card:nth-child(2) .card-image {
+            object-position: center 70%;
+        }
+        
+        .card:nth-child(3) .card-image {
+            object-position: center center;
+        }
+        
+        .card:nth-child(4) .card-image {
+            object-position: center center;
+        }
+        
+        .card:nth-child(5) .card-image {
+            object-position: center center;
+        }
+        
+        .card:nth-child(6) .card-image {
+            object-position: center center;
+        }
+
+        .card-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #001f3f;
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            text-align: center;
+        }
+
+        .sobre-nosotros-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .sobre-text {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item .stat-number:has(+ .stat-subdescription) {
+            font-size: 2rem;
+        }
+        
+        .stat-description {
+            font-size: 1rem;
+        }
+        
+        .stat-subdescription {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,31,63,0.1);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: #003d7a;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contacto-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,31,63,0.1);
+        }
+
+        .form-titulo {
+            text-align: center;
+            color: #001f3f;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-subtitulo {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #001f3f;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #003d7a;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .sobre-nosotros-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            #contacto > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="imagenes/Logo.png" alt="Logo Ribel">
+                RIBEL
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="productos-toggle">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="instalaciones-electricas.html">⚡ Instalaciones Eléctricas</a>
+                        <a href="energia-fotovoltaica.html">☀️ Energía Fotovoltaica</a>
+                        <a href="domotica.html">💡 Domótica</a>
+                        <a href="climatizacion.html">❄️ Climatización</a>
+                        <a href="puertas-automatizadas.html">🚪 Puertas Automatizadas</a>
+                        <a href="fontaneria.html">🚰 Fontanería</a>
+                    </div>
+                </li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <img src="imagenes/instalador.jpg" alt="Instalador de paneles solares" class="hero-image">
+        
+        <div class="hero-content">
+            <h1>RIBEL INSTALACIONES</h1>
+            <p>Soluciones profesionales en instalaciones eléctricas, climatización, fontanería y mantenimiento</p>
+            <a href="#contacto" class="btn">Solicitar Presupuesto</a>
+        </div>
+    </section>
+
+    <section id="productos">
+        <h2>Nuestros Productos</h2>
+        <div class="productos-grid">
+            <div class="card">
+                <a href="instalaciones-electricas.html">
+                    <div class="card-content">
+                        <h3>⚡ Instalaciones Eléctricas</h3>
+                        <p>Realizamos instalaciones eléctricas en viviendas e industrias, tanto en obra nueva como en reformas, garantizando seguridad, eficiencia y cumplimiento de la normativa vigente.</p>
+                    </div>
+                    <img src="imagenes/Electricidad.webp" alt="Instalaciones Eléctricas" class="card-image">
+                </a>
+            </div>
+            <div class="card">
+                <a href="energia-fotovoltaica.html">
+                    <div class="card-content">
+                        <h3>☀️ Energía Fotovoltaica</h3>
+                        <p>Ofrecemos instalación profesional de paneles solares en viviendas e industrias, ayudando a reducir el consumo energético y el ahorro en la factura eléctrica.</p>
+                    </div>
+                    <img src="imagenes/solar1.jpg" alt="Energía Fotovoltaica" class="card-image">
+                </a>
+            </div>
+            <div class="card">
+                <a href="domotica.html">
+                    <div class="card-content">
+                        <h3>💡 Domótica</h3>
+                        <p>Instalamos sistemas de domótica y automatización que permiten controlar tu vivienda o industria de forma sencilla, optimizando el consumo energético y aumentando la comodidad y la seguridad.</p>
+                    </div>
+                    <img src="imagenes/domotica 2.webp" alt="Domótica" class="card-image">
+                </a>
+            </div>
+            <div class="card">
+                <a href="climatizacion.html">
+                    <div class="card-content">
+                        <h3>❄️ Climatización</h3>
+                        <p>Ofrecemos soluciones completas en climatización para vivienda e industria, mejorando el confort y la eficiencia energética durante todo el año.</p>
+                    </div>
+                    <img src="imagenes/Climatizacion.jpg" alt="Climatización" class="card-image">
+                </a>
+            </div>
+            <div class="card">
+                <a href="puertas-automatizadas.html">
+                    <div class="card-content">
+                        <h3>🚪 Puertas Automatizadas</h3>
+                        <p>Montaje e instalación de puertas automáticas, garajes, persianas motorizadas y sistemas de acceso controlado.</p>
+                    </div>
+                    <img src="imagenes/Puertas secionales.jpg" alt="Puertas Automatizadas" class="card-image">
+                </a>
+            </div>
+            <div class="card">
+                <a href="fontaneria.html">
+                    <div class="card-content">
+                        <h3>🚰 Fontanería</h3>
+                        <p>Instalaciones de fontanería, sanitarios, calefacción por suelo radiante y reparación de averías. Servicio rápido y eficaz.</p>
+                    </div>
+                    <img src="imagenes/fontaneria 1.jpg" alt="Fontanería" class="card-image">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <h2>Sobre Nosotros</h2>
+        
+        <!-- Dos primeros párrafos a todo el ancho -->
+        <div style="max-width: 100%; margin-bottom: 3rem;">
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; text-align: justify;">RIBEL INSTALACIONES es una empresa con una visión moderna y una amplia experiencia en el sector de las instalaciones, especializada en ofrecer soluciones integrales para vivienda, industria y entornos comerciales. A lo largo de los años hemos desarrollado numerosos proyectos, lo que nos ha permitido consolidarnos como una empresa de confianza, capaz de afrontar trabajos de cualquier complejidad con garantías.</p>
+            
+            <p style="font-size: 1.1rem; color: #555; text-align: justify;">Nos dedicamos a la realización de instalaciones eléctricas, climatización, instalaciones fotovoltaicas, fontanería y montaje de puertas automatizadas, trabajando siempre conforme a la normativa vigente y utilizando materiales y tecnologías de primer nivel.</p>
+        </div>
+        
+        <!-- Resto del contenido con grid -->
+        <div class="sobre-nosotros-content">
+            <div class="sobre-text">
+                <p>En RIBEL INSTALACIONES apostamos por la profesionalidad, la innovación y el compromiso con cada cliente, cuidando cada detalle desde el inicio hasta la finalización del proyecto para ofrecer soluciones seguras, duraderas y adaptadas a cada necesidad.</p>
+                <br>
+                <b>Nuestro objetivo </b>
+                <br>
+                <br>
+                <p>Unificar en una misma empresa todos los servicios de instalación, ofreciendo a nuestros clientes una solución completa y coordinada tanto para viviendas como para instalaciones industriales. De este modo, simplificamos la gestión de los proyectos y aseguramos un resultado eficiente, ordenado y de máxima calidad.</p>
+            </div>
+            <div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-description">Clientes Satisfechos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">Gran Experiencia</div>
+                        <div class="stat-subdescription">en el Sector</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">15 Diciembre 2025</div>
+                    <h3>Ventajas de la Domótica en el Hogar</h3>
+                    <p>Descubre cómo la automatización del hogar puede mejorar tu calidad de vida, aumentar la seguridad y reducir el consumo energético.</p>
+                    <a href="blog-domotica.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">10 Diciembre 2025</div>
+                    <h3>Energía Solar: Inversión del Futuro</h3>
+                    <p>Todo lo que necesitas saber sobre la instalación de paneles solares y el retorno de inversión a medio plazo.</p>
+                    <a href="blog-energia-solar.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">5 Diciembre 2025</div>
+                    <h3>Mantenimiento Preventivo de Instalaciones</h3>
+                    <p>La importancia de realizar revisiones periódicas para evitar averías y garantizar el correcto funcionamiento de tus instalaciones.</p>
+                    <a href="blog-mantenimiento.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">28 Noviembre 2025</div>
+                    <h3>Aerotermia: La Climatización del Futuro</h3>
+                    <p>Conoce las ventajas de la aerotermia como sistema de climatización sostenible y eficiente para tu hogar.</p>
+                    <a href="blog-aerotermia.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">20 Noviembre 2025</div>
+                    <h3>Cargadores para Vehículos Eléctricos</h3>
+                    <p>Guía completa sobre la instalación de puntos de recarga en viviendas y comunidades. Tipos, costes y ayudas disponibles.</p>
+                    <a href="blog-cargadores-electricos.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-content">
+                    <div class="blog-date">12 Noviembre 2025</div>
+                    <h3>Certificados y Boletines Eléctricos</h3>
+                    <p>Todo lo que debes saber sobre los certificados de instalación eléctrica, cuándo son obligatorios y cómo obtenerlos.</p>
+                    <a href="blog-certificados-electricos.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 8px 20px; font-size: 0.9rem;">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        
+        <div style="max-width: 900px; margin: 0 auto 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,31,63,0.1); text-align: center;">
+                <div style="font-size: 2rem; color: #003d7a; margin-bottom: 0.5rem;">📞</div>
+                <h3 style="color: #001f3f; margin-bottom: 0.5rem; font-size: 1.1rem;">Teléfono</h3>
+                <a href="tel:+34642463595" style="color: #003d7a; text-decoration: none; font-size: 1rem; font-weight: 500;">642 463 595</a>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,31,63,0.1); text-align: center;">
+                <div style="font-size: 2rem; color: #003d7a; margin-bottom: 0.5rem;">✉️</div>
+                <h3 style="color: #001f3f; margin-bottom: 0.5rem; font-size: 1.1rem;">Email</h3>
+                <a href="mailto:ribelpe@gmail.com" style="color: #003d7a; text-decoration: none; font-size: 1rem; font-weight: 500;">ribelpe@gmail.com</a>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,31,63,0.1); text-align: center;">
+                <div style="font-size: 2rem; color: #003d7a; margin-bottom: 0.5rem;">📍</div>
+                <h3 style="color: #001f3f; margin-bottom: 0.5rem; font-size: 1.1rem;">Dirección</h3>
+                <p style="color: #555; font-size: 1rem; margin: 0;">Av. Juan Carlos I Nº67<br>Traiguera</p>
+            </div>
+        </div>
+        
+        <form class="contacto-form">
+            <h3 class="form-titulo">Rellena el formulario</h3>
+            <p class="form-subtitulo">Nos ponemos en contacto en 24/48h</p>
+            
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ribel Instalaciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Control del menú desplegable de productos
+        const productosToggle = document.getElementById('productos-toggle');
+        const dropdown = document.querySelector('.dropdown');
+        
+        if (productosToggle && dropdown) {
+            // Toggle del menú al hacer clic en "Productos"
+            productosToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Cerrar el menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Cerrar el menú al hacer clic en un enlace del dropdown
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
+
+        // Formulario de contacto
+        const contactForm = document.querySelector('.contacto-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>

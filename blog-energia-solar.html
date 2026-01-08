@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energía Solar: Inversión del Futuro - Ribel Instalaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-height: 60px;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #66b3ff;
+        }
+        
+        /* Menú desplegable de productos */
+        .nav-links li {
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #001f3f;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #003d7a;
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.8em;
+        }
+
+        .blog-hero {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 120px 2rem 60px;
+            margin-top: 70px;
+        }
+
+        .blog-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .blog-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .blog-content h2 {
+            color: #001f3f;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .blog-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .blog-content li {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .blog-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,31,63,0.2);
+            margin: 2rem 0;
+            display: block;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .destacado {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-left: 4px solid #003d7a;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #001f3f;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="imagenes/Logo.png" alt="Logo Ribel">
+                    RIBEL
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="productos-toggle">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="instalaciones-electricas.html">⚡ Instalaciones Eléctricas</a>
+                        <a href="energia-fotovoltaica.html">☀️ Energía Fotovoltaica</a>
+                        <a href="domotica.html">💡 Domótica</a>
+                        <a href="climatizacion.html">❄️ Climatización</a>
+                        <a href="puertas-automatizadas.html">🚪 Puertas Automatizadas</a>
+                        <a href="fontaneria.html">🚰 Fontanería</a>
+                    </div>
+                </li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="blog-hero">
+        <div class="blog-container">
+            <div class="blog-date">10 Diciembre 2025</div>
+            <h1>Energía Solar: Inversión del Futuro</h1>
+            <p>Todo lo que necesitas saber sobre la instalación de paneles solares y el retorno de inversión a medio plazo.</p>
+        </div>
+    </section>
+
+    <article class="blog-content">
+        <p>La energía solar fotovoltaica se ha convertido en una de las inversiones más rentables y sostenibles que puedes realizar en tu vivienda o negocio. Con la subida constante de los precios de la electricidad y las mejoras tecnológicas en paneles solares, nunca ha sido mejor momento para dar el salto al autoconsumo.</p>
+
+        <!-- IMAGEN PRINCIPAL DEL ARTÍCULO -->
+        <img src="imagenes/blog fotovoltaica.jpg" alt="Instalación de paneles solares" class="blog-image">
+        <p class="image-caption">Instalación fotovoltaica en vivienda unifamiliar</p>
+
+        <h2>¿Por Qué Invertir en Energía Solar?</h2>
+        <p>Las razones para instalar paneles solares son cada vez más convincentes:</p>
+        <ul>
+            <li><strong>Ahorro económico:</strong> Reduce tu factura eléctrica hasta un 70%</li>
+            <li><strong>Independencia energética:</strong> Genera tu propia electricidad</li>
+            <li><strong>Valor añadido:</strong> Aumenta el valor de tu propiedad</li>
+            <li><strong>Sostenibilidad:</strong> Energía 100% limpia y renovable</li>
+        </ul>
+
+        <h2>Rentabilidad de una Instalación Solar</h2>
+        <p>Uno de los aspectos que más preocupa es el retorno de la inversión. Analicemos los números:</p>
+
+        <div class="destacado">
+            <strong>Ejemplo práctico:</strong> Una instalación solar de 5 kW para una vivienda tiene un coste aproximado de 6.000-8.000€. Con un ahorro anual de 1.200-1.500€ en la factura eléctrica, el periodo de amortización se sitúa entre 5 y 7 años. Teniendo en cuenta que los paneles tienen una vida útil de más de 25 años, el ahorro total puede superar los 30.000€.
+        </div>
+
+        <h2>Subvenciones y Ayudas Disponibles</h2>
+        <p>El gobierno y las comunidades autónomas ofrecen importantes ayudas para la instalación de energía solar:</p>
+        <ul>
+            <li>Subvenciones directas de hasta el 40% del coste</li>
+            <li>Bonificaciones en el IBI (hasta 50% durante 3-5 años)</li>
+            <li>Deducciones en el IRPF (hasta 20% del coste)</li>
+            <li>Financiación preferente con intereses reducidos</li>
+        </ul>
+
+        <h2>¿Cuánta Energía Puedo Generar?</h2>
+        <p>La producción depende de varios factores:</p>
+        <ul>
+            <li><strong>Ubicación:</strong> En España recibimos una media de 2.500 horas de sol al año</li>
+            <li><strong>Orientación:</strong> La ideal es orientación sur con inclinación de 30-35°</li>
+            <li><strong>Potencia instalada:</strong> Un panel de 400W puede generar 1,5-2 kWh al día</li>
+        </ul>
+
+        <h2>Tipos de Instalaciones Solares</h2>
+        
+        <h3>1. Autoconsumo sin Baterías</h3>
+        <p>La opción más económica. Consumes la energía solar durante el día y de la red eléctrica por la noche. El excedente se vierte a la red recibiendo compensación económica.</p>
+
+        <h3>2. Autoconsumo con Baterías</h3>
+        <p>Mayor inversión inicial pero máxima independencia energética. Almacenas el excedente para usarlo cuando no hay sol, reduciendo aún más tu dependencia de la red.</p>
+
+        <h3>3. Instalación Aislada</h3>
+        <p>Para viviendas sin acceso a la red eléctrica. Requiere un sistema completo de baterías y generador de apoyo.</p>
+
+        <h2>Mantenimiento y Durabilidad</h2>
+        <p>Los paneles solares requieren muy poco mantenimiento:</p>
+        <ul>
+            <li>Limpieza anual para optimizar rendimiento</li>
+            <li>Revisión del inversor cada 2-3 años</li>
+            <li>Garantía de rendimiento del 80% a los 25 años</li>
+            <li>Inversores con vida útil de 10-15 años (reemplazables)</li>
+        </ul>
+
+        <h2>Impacto Ambiental Positivo</h2>
+        <p>Además del ahorro económico, contribuyes significativamente al medio ambiente:</p>
+        <ul>
+            <li>Una instalación de 5 kW evita la emisión de 2 toneladas de CO₂ al año</li>
+            <li>Equivalente a plantar 100 árboles anualmente</li>
+            <li>Reduces tu huella de carbono personal en un 30%</li>
+        </ul>
+
+        <h2>¿Es el Momento de Instalar Paneles Solares?</h2>
+        <p>La respuesta es un rotundo sí. Los costes de instalación han bajado un 80% en la última década, mientras que el precio de la electricidad no para de subir. Las ayudas disponibles y los avances tecnológicos hacen que 2025 sea el año ideal para dar el paso.</p>
+
+        <div class="cta-section">
+            <h2>¿Quieres calcular el ahorro en tu caso?</h2>
+            <p>Realizamos estudios personalizados gratuitos para calcular el retorno de inversión específico para tu vivienda o negocio</p>
+            <a href="index.html#contacto" class="btn">Solicitar Estudio Gratuito</a>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2025 Ribel Instalaciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Control del menú desplegable de productos
+        const productosToggle = document.getElementById('productos-toggle');
+        const dropdown = document.querySelector('.dropdown');
+        
+        if (productosToggle && dropdown) {
+            // Toggle del menú al hacer clic en "Productos"
+            productosToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Cerrar el menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Cerrar el menú al hacer clic en un enlace del dropdown
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

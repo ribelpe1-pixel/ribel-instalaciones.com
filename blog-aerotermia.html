@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aerotermia: La Climatización del Futuro - Ribel Instalaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-height: 60px;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #66b3ff;
+        }
+        
+        /* Menú desplegable de productos */
+        .nav-links li {
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #001f3f;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #003d7a;
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.8em;
+        }
+
+        .blog-hero {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 120px 2rem 60px;
+            margin-top: 70px;
+        }
+
+        .blog-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .blog-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .blog-content h2 {
+            color: #001f3f;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .blog-content h3 {
+            color: #003d7a;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .blog-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .blog-content li {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .blog-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,31,63,0.2);
+            margin: 2rem 0;
+            display: block;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .destacado {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-left: 4px solid #003d7a;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #001f3f;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="imagenes/Logo.png" alt="Logo Ribel">
+                    RIBEL
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="productos-toggle">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="instalaciones-electricas.html">⚡ Instalaciones Eléctricas</a>
+                        <a href="energia-fotovoltaica.html">☀️ Energía Fotovoltaica</a>
+                        <a href="domotica.html">💡 Domótica</a>
+                        <a href="climatizacion.html">❄️ Climatización</a>
+                        <a href="puertas-automatizadas.html">🚪 Puertas Automatizadas</a>
+                        <a href="fontaneria.html">🚰 Fontanería</a>
+                    </div>
+                </li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="blog-hero">
+        <div class="blog-container">
+            <div class="blog-date">28 Noviembre 2025</div>
+            <h1>Aerotermia: La Climatización del Futuro</h1>
+            <p>Conoce las ventajas de la aerotermia como sistema de climatización sostenible y eficiente para tu hogar.</p>
+        </div>
+    </section>
+
+    <article class="blog-content">
+        <p>La aerotermia se ha convertido en una de las tecnologías más innovadoras y eficientes para la climatización de viviendas. Este sistema aprovecha la energía contenida en el aire exterior para proporcionar calefacción, refrigeración y agua caliente sanitaria de forma sostenible y económica.</p>
+
+        <!-- IMAGEN PRINCIPAL DEL ARTÍCULO -->
+        <img src="imagenes/blog aerotermia.jpg" alt="Sistema de aerotermia" class="blog-image">
+        <p class="image-caption">Unidad exterior de aerotermia de última generación</p>
+
+        <h2>¿Qué es la Aerotermia?</h2>
+        <p>La aerotermia es una tecnología que extrae hasta el 75% de la energía del aire exterior, incluso cuando las temperaturas son muy bajas. Mediante una bomba de calor, el sistema transfiere esta energía al interior de la vivienda, proporcionando un rendimiento hasta 5 veces superior al de los sistemas convencionales.</p>
+
+        <h2>Ventajas de la Aerotermia</h2>
+        <ul>
+            <li><strong>Máxima eficiencia energética:</strong> Por cada kW consumido, la aerotermia puede generar hasta 5 kW de energía térmica, lo que se traduce en un ahorro de hasta el 70% en la factura energética.</li>
+            <li><strong>Sistema todo en uno:</strong> Un único equipo proporciona calefacción en invierno, refrigeración en verano y agua caliente sanitaria durante todo el año.</li>
+            <li><strong>Energía renovable:</strong> La aerotermia está considerada energía renovable por la Unión Europea, ya que aprovecha una fuente inagotable y gratuita: el aire.</li>
+            <li><strong>Respetuosa con el medio ambiente:</strong> No produce emisiones locales de CO2 ni utiliza combustibles fósiles, contribuyendo a la lucha contra el cambio climático.</li>
+            <li><strong>Compatibilidad con fotovoltaica:</strong> Al funcionar con electricidad, se puede combinar con paneles solares para conseguir una vivienda prácticamente autosuficiente.</li>
+            <li><strong>Bajo mantenimiento:</strong> Los sistemas de aerotermia requieren muy poco mantenimiento, normalmente una revisión anual es suficiente.</li>
+            <li><strong>Subvenciones disponibles:</strong> Existen ayudas y subvenciones del Gobierno y las comunidades autónomas para la instalación de aerotermia.</li>
+        </ul>
+
+        <h2>¿Cómo Funciona?</h2>
+        <p>El sistema de aerotermia funciona mediante un ciclo termodinámico que capta la energía del aire exterior a través de un intercambiador. Esta energía se transfiere a un fluido refrigerante que, mediante un compresor, aumenta su temperatura. Finalmente, esta energía se cede al sistema de climatización de la vivienda (radiadores, suelo radiante o fancoils) o al circuito de agua caliente sanitaria.</p>
+        
+        <p>Lo más sorprendente es que este proceso funciona incluso con temperaturas exteriores de hasta -20°C, lo que hace que la aerotermia sea viable en prácticamente cualquier zona climática de España.</p>
+
+        <h2>Tipos de Instalación</h2>
+        <h3>Aerotermia con Suelo Radiante</h3>
+        <p>Es la combinación más eficiente. El suelo radiante trabaja a baja temperatura (35-45°C), lo que permite que la bomba de calor funcione con máximo rendimiento. Proporciona un confort térmico excepcional con una distribución uniforme del calor.</p>
+
+        <h3>Aerotermia con Radiadores</h3>
+        <p>También es posible instalar aerotermia con radiadores, aunque el rendimiento es ligeramente inferior. Es recomendable utilizar radiadores de baja temperatura o aumentar el tamaño de los radiadores existentes para optimizar el sistema.</p>
+
+        <h3>Aerotermia con Fancoils</h3>
+        <p>Los fancoils son emisores que funcionan tanto para calefacción como para refrigeración. Son una excelente opción cuando se necesita enfriar la vivienda en verano, ya que pueden producir aire frío de forma muy eficiente.</p>
+
+        <h2>¿Es Rentable la Aerotermia?</h2>
+        <p>Aunque la inversión inicial de un sistema de aerotermia es superior a la de sistemas convencionales (entre 12.000€ y 20.000€ para una vivienda unifamiliar), el ahorro energético que proporciona permite amortizar la instalación en 6-8 años. A partir de ese momento, el ahorro es puro beneficio.</p>
+        
+        <div class="destacado">
+            <strong>Ayudas disponibles:</strong> Las ayudas del programa Next Generation EU pueden cubrir hasta el 40% del coste de la instalación, reduciendo significativamente el periodo de amortización.
+        </div>
+
+        <h2>Aerotermia y Fotovoltaica: La Combinación Perfecta</h2>
+        <p>La instalación conjunta de aerotermia y paneles solares fotovoltaicos permite conseguir una vivienda de consumo casi nulo. Los paneles solares generan la electricidad que consume la bomba de calor de aerotermia, reduciendo la factura energética prácticamente a cero y consiguiendo una independencia energética casi total.</p>
+
+        <h2>Conclusión</h2>
+        <p>La aerotermia representa el futuro de la climatización residencial. Su alta eficiencia, su respeto por el medio ambiente y su capacidad para proporcionar calefacción, refrigeración y agua caliente con un solo sistema la convierten en la mejor opción para viviendas de nueva construcción y rehabilitaciones integrales.</p>
+
+        <div class="cta-section">
+            <h2>¿Quieres instalar aerotermia en tu hogar?</h2>
+            <p>Te asesoramos sin compromiso y te ayudamos a encontrar la solución perfecta para tu vivienda</p>
+            <a href="index.html#contacto" class="btn">Solicitar Información</a>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2025 Ribel Instalaciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Control del menú desplegable de productos
+        const productosToggle = document.getElementById('productos-toggle');
+        const dropdown = document.querySelector('.dropdown');
+        
+        if (productosToggle && dropdown) {
+            // Toggle del menú al hacer clic en "Productos"
+            productosToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Cerrar el menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Cerrar el menú al hacer clic en un enlace del dropdown
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
